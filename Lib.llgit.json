@@ -1,0 +1,8 @@
+{
+	"llgit":1.0,
+	"name": "LequerBar's Dnevnik.ru Auto Run",
+	"id" : "lldv-dnevnik.ru",
+	"version": "1.0.0",
+	"requeredLibs": ["llgit:LLdvHttp"],
+	"update":"dnevnik.ru.auto.run/Dnevnik.Ru.AutoRun.update.json"
+}

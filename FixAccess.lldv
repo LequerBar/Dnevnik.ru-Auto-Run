@@ -1,0 +1,14 @@
+directory AppLequer
+
+// нужна, взял часть кода из LLdvHttp
+
+@:if lldev_1.2
+_import HttpAccess from @:Lib:LLdvHttp.package.http;
+
+class SafeAccess(HttpAccess){
+	@:public constructor SafeAccess(){
+		constructor();
+		constructor:fromFile("./dnevnik.ru.auto.run/keys.json");
+	}
+}
+@:end
