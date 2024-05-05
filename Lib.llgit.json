@@ -3,6 +3,6 @@
 	"name": "LequerBar's Dnevnik.ru Auto Run",
 	"id" : "lldv-dnevnik.ru",
 	"version": "1.0.0",
-	"requeredLibs": ["llgit:LLdvHttp"],
+	"requiredLibs": ["llgit:LLdvHttp:{version>=1.2}"],
 	"update":"dnevnik.ru.auto.run/Dnevnik.Ru.AutoRun.update.json"
 }

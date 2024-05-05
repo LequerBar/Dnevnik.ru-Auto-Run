@@ -2,7 +2,6 @@ directory AppLequer
 
 @:if lldev_1.2
 _import Http from Base.package;
-_import Http from AppLequer.package;
 @:else
 _import Directory from Base.package;
 @:end
@@ -13,7 +12,6 @@ _import String from Base.package like String;
 _import StringURLFormat from Base.package.StringManager like StringURL;
 
 @:if lldev_1.2
-// Опять переезд классов
 @:link DInt = @:private import DigitalInt from Base.shared;
 @:end
 
@@ -21,17 +19,19 @@ _import StringURLFormat from Base.package.StringManager like StringURL;
 class DnevnikRuApi(){
 	/#	Setup	#/
 	
+	@:public v:<HttpLogin> netInstance;
+
 	@:public fnc:DInt main(lgn<<S,pwr<<S) {
-		// Урааа, разраб LLDev наконец дал возможность вызывать Base без Directory
+		@:local v:<Http> __http =  Http:CreateNew();
 		@:if lldev_1.2
-			Http:Instance:set:(%'@User-Agent'%,Base:BrowserBase:get:random += Directory:Base:Ir);
-			Http:ConnectToServer(%'dnevnik.ru'%);
+			__http:set:(%'@User-Agent'%,Base:BrowserBase:get:random += Directory:Base:Ir);
+			__http:ConnectToServer(%'dnevnik.ru'%);
 		@:else
-			Directory:Http:Instance:set:(%'@User-Agent'%,Directory:Base:BrowserBase:get:random += Directory:Base:Ir);
-			Directory:ConnectToServer(%'dnevnik'%,%'ru'%);
+			__http:set:(%'@User-Agent'%,Directory:Base:BrowserBase:get:random += Directory:Base:Ir);
+			__http:ConnectToServer(%'dnevnik'%,%'ru'%);
 		@:end
-		// Звонит в main, если не успела эта библиотека инициализироваться
-		HttpLogin:?main();
+
+		netInstance = HttpLogin:new();
 		
 		HttpLogin:Input(lgn.format(StringURL),pwr.format(StringURL),@:if lldev_1.2 "Http:Instance" @:else "Directory:Http:Instance" @:end);
 		
@@ -58,6 +58,8 @@ class DnevnikRuApi(){
 				}
 			do%
 		@:end
+		
+		
 		$:return 0;
 	}
 	
